@@ -17,7 +17,7 @@ pipeline {
 
         stage('Application build') {
             steps {
-                sh ' sudo chown -R 108:117 "/.npm"'
+                sh 'chown -R 108:117 "/.npm"'
                 sh 'sh scripts/build.sh'
             }
         }
