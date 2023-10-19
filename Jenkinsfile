@@ -30,7 +30,9 @@ pipeline {
 
         stage('Docker Image Build') {
             steps {
-                sh 'docker build -t aavolosh/devops:latest'
+                script {
+                    docker.build("${registry}:latest")
+                }
             }
         }
 
