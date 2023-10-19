@@ -1,10 +1,5 @@
 pipeline {
-  agent {
-    node {
-      label '7.8.0'
-    }
-
-  }
+  agent any
   stages {
     stage('Git Checkout') {
       steps {
