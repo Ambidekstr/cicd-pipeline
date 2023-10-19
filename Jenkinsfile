@@ -12,13 +12,20 @@ pipeline {
 
         stage('Application build') {
             steps {
-                sh 'scripts/build.sh'
+                sh '''
+                    chmod +x scripts/build.sh
+                    scripts/build.sh
+                '''
             }
         }
 
         stage('Test') {
             steps {
-                sh 'scripts/test.sh'
+
+                sh '''
+                    chmod +x scripts/test.sh
+                    scripts/test.sh
+                '''
             }
         }
 
