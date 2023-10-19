@@ -33,7 +33,7 @@ pipeline {
         stage('Docker Image Push') {
             steps {
                 script {
-                    docker.withRegistry('https://registry.docker.hub.com/', 'dockerhub-id') {
+                    docker.withRegistry('', 'dockerhub-id') {
                         docker.image("${registry}:latest").push('latest')
                     }
                 }
