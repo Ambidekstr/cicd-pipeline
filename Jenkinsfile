@@ -5,7 +5,7 @@ pipeline {
       steps {
         script {
           checkout scm
-          def customImage = dicker.build("${redistry}:latest")
+          def customImage = docker.build("${redistry}:latest")
         }
 
       }
