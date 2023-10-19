@@ -6,7 +6,6 @@ pipeline {
                 script {
                     checkout scm
                 }
-
             }
         }
 
@@ -25,9 +24,8 @@ pipeline {
         stage('Docker Image Build') {
             steps {
                 script {
-                    docker.build("${registry}:latest")
+                    docker.build("myimage:latest")
                 }
-
             }
         }
 
@@ -35,7 +33,7 @@ pipeline {
             steps {
                 script {
                     docker.withRegistry('', 'dockerhub-id') {
-                        docker.image("${registry}:latest").push('latest')
+                        docker.image("myimage:latest").push('latest')
                     }
                 }
 
