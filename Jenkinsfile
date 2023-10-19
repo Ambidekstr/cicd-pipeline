@@ -16,7 +16,6 @@ pipeline {
 
         stage('Application build') {
             steps {
-                sh 'chown -R 108:117 "/.npm"'
                 sh 'sh scripts/build.sh'
             }
         }
