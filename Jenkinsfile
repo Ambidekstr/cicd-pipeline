@@ -11,6 +11,17 @@ pipeline {
       }
     }
 
+    stage('run') {
+      steps {
+        script {
+          docker.withRegistry('','dockerhub-id'){
+            docker.image("${registry}:latest").push('latest')
+          }
+        }
+
+      }
+    }
+
   }
   environment {
     registry = 'aavolosh/devops'
