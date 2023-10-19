@@ -24,7 +24,7 @@ pipeline {
         stage('Docker Image Build') {
             steps {
                 script {
-                    docker.build("myimage:latest")
+                    appImage = docker.build("myimage:latest")
                 }
             }
         }
@@ -33,7 +33,7 @@ pipeline {
             steps {
                 script {
                     docker.withRegistry('', 'dockerhub-id') {
-                        docker.image("myimage:latest").push('latest')
+                        appImage.push()
                     }
                 }
 
