@@ -1,41 +1,48 @@
 pipeline {
-  agent any
-  stages {
-    stage('Build') {
-      steps {
-        script {
-          checkout scm
-          def customImage = docker.build("${registry}:latest")
+    agent any
+    stages {
+
+        stage('Git Checkout') {
+            steps {
+                script {
+                    checkout scm
+                }
+            }
         }
 
-      }
-    }
-
-    stage('Push') {
-      steps {
-        script {
-          docker.withRegistry('','dockerhub-id'){
-            docker.image("${registry}:latest").push('latest')
-          }
+        stage('Application build') {
+            steps {
+                sh 'script scripts/build.sh'
+            }
         }
 
-      }
+        stage('Test') {
+            steps {
+                sh 'script scripts/test.sh'
+            }
+        }
+
+        stage('Docker Image Build') {
+            steps {
+                script {
+                    docker.build("${registry}:latest")
+                }
+            }
+        }
+
+        stage('Docker Image Push') {
+            steps {
+                script {
+                    docker.withRegistry('https://registry.docker.hub.com/', 'dockerhub-id') {
+                        docker.image("${registry}:latest").push('latest')
+                    }
+                }
+            }
+        }
+
     }
 
-    stage('Application build') {
-      steps {
-        sh 'sh "./scripts/build.sh"'
-      }
+    environment {
+        registry = 'aavolosh/devops'
     }
-
-    stage('Test') {
-      steps {
-        sh 'sh "./scripts/test.sh"'
-      }
-    }
-
-  }
-  environment {
-    registry = 'aavolosh/devops'
-  }
 }
