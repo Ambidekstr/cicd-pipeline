@@ -11,7 +11,7 @@ pipeline {
       }
     }
 
-    stage('run') {
+    stage('Push') {
       steps {
         script {
           docker.withRegistry('','dockerhub-id'){
