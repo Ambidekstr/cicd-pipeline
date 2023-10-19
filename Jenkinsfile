@@ -24,7 +24,7 @@ pipeline {
         stage('Docker Image Build') {
             steps {
                 script {
-                    appImage = docker.build("myimage:latest")
+                    appImage = docker.build("${registry}:latest")
                 }
             }
         }
