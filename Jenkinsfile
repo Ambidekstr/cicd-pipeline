@@ -22,6 +22,18 @@ pipeline {
       }
     }
 
+    stage('Application build') {
+      steps {
+        sh 'sh "./scripts/build.sh"'
+      }
+    }
+
+    stage('Test') {
+      steps {
+        sh 'sh "./scripts/test.sh"'
+      }
+    }
+
   }
   environment {
     registry = 'aavolosh/devops'
