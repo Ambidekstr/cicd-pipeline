@@ -1,7 +1,7 @@
 pipeline {
     agent {
         docker {
-            image 'node:7.8.0'
+            image 'node:7.8.0-alpine'
             args '-p 3000:3000'
         }
     }
@@ -17,17 +17,13 @@ pipeline {
 
         stage('Application build') {
             steps {
-                sh '''
-                    sh scripts/build.sh
-                '''
+                sh 'sh scripts/build.sh'
             }
         }
 
         stage('Test') {
             steps {
-                sh '''
-                    sh scripts/test.sh
-                '''
+                sh 'sh scripts/test.sh'
             }
         }
 
