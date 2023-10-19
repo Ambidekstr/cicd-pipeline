@@ -21,7 +21,6 @@ pipeline {
 
         stage('Test') {
             steps {
-
                 sh '''
                     chmod +x scripts/test.sh
                     scripts/test.sh
@@ -31,9 +30,7 @@ pipeline {
 
         stage('Docker Image Build') {
             steps {
-                script {
-                    docker.build("${registry}:latest")
-                }
+                sh 'docker build -t aavolosh/devops:latest'
             }
         }
 
@@ -46,7 +43,6 @@ pipeline {
                 }
             }
         }
-
     }
 
     environment {
